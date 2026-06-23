@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lab · Carter Bayer</title>
+<meta name="description" content="A place for side projects and occasional builds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F1EADB;--paper-deep:#E7DFC9;--butter:#FAF0CA;
+    --ink:#0D1F2D;--ink-soft:#2A3742;
+    --sage:#6A8E7F;--plum:#714955;--signal:#E53935;
+    --rule:#C9BFA6;
+    --sans:'Geist',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+    --mono:'Geist Mono',ui-monospace,'SF Mono',Menlo,monospace;
+    --serif:'Instrument Serif',Georgia,serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);
+    font-weight:400;line-height:1.55;-webkit-font-smoothing:antialiased;
+    padding:0 24px}
+  .wrap{max-width:680px;margin:0 auto;padding:46px 0 64px;
+    animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.wrap{animation:none}}
+
+  /* header */
+  header{display:flex;align-items:center;justify-content:space-between;
+    padding-bottom:54px}
+  .brand{display:flex;align-items:center;gap:11px}
+  .brand svg{width:30px;height:30px;flex:none}
+  .brand .nm{font-family:var(--sans);font-weight:500;font-size:15px;
+    letter-spacing:-.01em;color:var(--ink)}
+  .tag{font-family:var(--mono);font-size:11px;letter-spacing:.22em;
+    color:var(--ink-soft);text-transform:uppercase}
+
+  /* hero */
+  .eyebrow{font-family:var(--mono);font-size:11.5px;letter-spacing:.24em;
+    color:var(--sage);text-transform:uppercase;margin-bottom:18px}
+  h1{font-family:var(--sans);font-weight:600;font-size:clamp(40px,9vw,56px);
+    letter-spacing:-.02em;line-height:1;color:var(--ink)}
+  .lede{font-size:17px;color:var(--ink-soft);margin-top:16px;max-width:42ch}
+  .lede em{font-family:var(--serif);font-style:italic;font-size:20px;
+    color:var(--plum)}
+
+  /* index */
+  .index{margin-top:46px;border-top:1px solid var(--rule)}
+  .colhead{display:grid;grid-template-columns:34px 1fr auto;gap:18px;
+    padding:12px 4px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;
+    color:var(--ink-soft);text-transform:uppercase;border-bottom:1px solid var(--rule)}
+  .entry{display:grid;grid-template-columns:34px 1fr auto auto;gap:18px;
+    align-items:baseline;padding:20px 4px;border-bottom:1px solid var(--rule);
+    text-decoration:none;color:var(--ink);transition:background .15s ease,padding .15s ease}
+  .entry:hover,.entry:focus-visible{background:var(--paper-deep);
+    padding-left:12px;padding-right:12px;outline:none}
+  .e-num{font-family:var(--mono);font-size:12px;color:var(--ink-soft);line-height:1.7}
+  .e-name{font-family:var(--sans);font-weight:500;font-size:21px;
+    letter-spacing:-.01em;line-height:1.2;color:var(--ink)}
+  .entry:hover .e-name,.entry:focus-visible .e-name{color:var(--plum)}
+  .e-desc{display:block;font-size:14px;color:var(--ink-soft);margin-top:4px;max-width:46ch}
+  .e-date{font-family:var(--mono);font-size:12px;color:var(--ink-soft);
+    white-space:nowrap;line-height:1.7}
+  .e-arrow{font-size:17px;color:var(--rule);line-height:1.2;transition:color .15s ease,transform .15s ease}
+  .entry:hover .e-arrow,.entry:focus-visible .e-arrow{color:var(--signal);transform:translateX(3px)}
+
+  /* footer */
+  footer{margin-top:40px;display:flex;justify-content:space-between;
+    font-family:var(--mono);font-size:11px;letter-spacing:.06em;color:var(--ink-soft)}
+  footer a{color:var(--ink-soft);text-decoration:none}
+  footer a:hover{color:var(--plum)}
+
+  @media (max-width:480px){
+    .entry{grid-template-columns:24px 1fr auto;gap:12px}
+    .e-arrow{display:none}
+    .colhead{grid-template-columns:24px 1fr auto;gap:12px}
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+
+    <header>
+      <div class="brand">
+        <svg viewBox="0 0 40 40" aria-label="Carter Bayer">
+          <circle cx="20" cy="20" r="16" fill="none" stroke="#0D1F2D" stroke-width="2"/>
+          <line x1="9" y1="16" x2="31" y2="16" stroke="#0D1F2D" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="20" cy="11" r="2.4" fill="#714955"/>
+        </svg>
+        <span class="nm">Carter Bayer</span>
+      </div>
+      <span class="tag">Lab</span>
+    </header>
+
+    <div class="eyebrow">carterbayer.com</div>
+    <h1>Lab</h1>
+    <p class="lede">A place for side projects and occasional builds. <em>Odds and ends.</em></p>
+
+    <div class="index">
+      <div class="colhead">
+        <span>No.</span><span>Project</span><span>Date</span>
+      </div>
+
+      <!-- To add a project: copy one .entry block below, set href to the folder,
+           bump the number, and edit name / desc / date. -->
+
+      <a class="entry" href="dr-j/">
+        <span class="e-num">01</span>
+        <span class="e-main">
+          <span class="e-name">Dr. J's Rounds</span>
+          <span class="e-desc">Louisville bachelor weekend itinerary. Animated, single page.</span>
+        </span>
+        <span class="e-date">2026 · 07</span>
+        <span class="e-arrow">&rarr;</span>
+      </a>
+
+    </div>
+
+    <footer>
+      <span>Carter Bayer</span>
+      <a href="https://carterbayer.com">carterbayer.com</a>
+    </footer>
+
+  </div>
+</body>
+</html>
