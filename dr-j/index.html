@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dr. J's Rounds — Louisville</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EEF1EE;--ink:#16202A;--slate:#3C4A52;--mut:#6B7882;
+    --teal:#0E7C7B;--teal-d:#0A5C5B;--teal-pale:#E4F0EE;
+    --red:#C81E36;--red-pale:#FBE9EC;--rule:#DCE3DF;
+    --grid-a:rgba(200,30,54,.045);--grid-b:rgba(200,30,54,.085);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--paper);font-family:'Inter',sans-serif;color:var(--slate);
+    line-height:1.5;padding:26px 14px 48px;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .card{max-width:600px;margin:0 auto;position:relative;background:#fff;
+    border:1px solid var(--rule);box-shadow:0 22px 60px rgba(22,32,42,.16);
+    background-image:
+      linear-gradient(var(--grid-a) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid-a) 1px,transparent 1px),
+      linear-gradient(var(--grid-b) 1px,transparent 1px),
+      linear-gradient(90deg,var(--grid-b) 1px,transparent 1px);
+    background-size:9px 9px,9px 9px,45px 45px,45px 45px;
+    overflow:hidden;animation:rise .6s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){.card{animation:none}}
+
+  .mast{padding:30px 30px 0;text-align:center}
+  .cross{display:inline-flex;align-items:center;gap:9px;margin-bottom:14px}
+  .cross svg{width:20px;height:20px}
+  .kicker{font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.28em;
+    color:var(--red);text-transform:uppercase;font-weight:700}
+  .preline{font-family:'Oswald',sans-serif;font-weight:500;font-size:17px;letter-spacing:.32em;
+    color:var(--teal);text-transform:uppercase;margin-bottom:-4px}
+  .title{font-family:'Oswald',sans-serif;font-weight:700;font-size:clamp(64px,18vw,104px);
+    line-height:.86;color:var(--ink);letter-spacing:.01em;text-transform:uppercase}
+  .sub{font-size:14px;color:var(--mut);margin-top:14px}
+
+  .trace{height:72px;margin:16px 0 0;width:100%;overflow:hidden}
+  .strip{display:flex;width:max-content;animation:ekg 13s linear infinite}
+  .strip svg{display:block;flex:none}
+  .strip path{fill:none;stroke:var(--red);stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  @keyframes ekg{from{transform:translateX(0)}to{transform:translateX(-1200px)}}
+  @media (prefers-reduced-motion:reduce){.strip{animation:none}}
+
+  .band{margin-top:18px;background:var(--teal);color:#EAF6F4;padding:11px 18px;
+    display:flex;flex-wrap:wrap;gap:4px 18px;justify-content:center;
+    font-family:'Space Mono',monospace;font-size:10.5px;letter-spacing:.06em}
+  .band b{color:#fff;font-weight:700}
+
+  .body{padding:24px 30px 30px}
+
+  .admit{border:1.5px solid var(--teal);background:var(--teal-pale);
+    padding:16px 18px;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center}
+  .admit .chip{background:#fff;border:1.5px solid var(--teal);color:var(--teal)}
+  .lbl{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;
+    letter-spacing:.18em;color:var(--teal-d);text-transform:uppercase;margin-bottom:5px}
+  .lh{font-family:'Oswald',sans-serif;font-weight:600;font-size:21px;color:var(--ink);
+    text-transform:uppercase;letter-spacing:.02em;line-height:1.05}
+  .la{font-family:'Space Mono',monospace;font-size:11.5px;color:var(--teal-d);margin-top:5px}
+  .la a{color:var(--teal-d)}
+  .ld{font-size:13px;color:var(--slate);margin-top:8px;max-width:46ch}
+  .flag{margin-top:12px;display:flex;align-items:center;gap:9px;
+    background:var(--red-pale);border:1px solid rgba(200,30,54,.32);border-radius:6px;padding:9px 12px}
+  .flag .rxm{font-family:'Space Mono',monospace;font-weight:700;font-size:15px;color:var(--red)}
+  .flag .ft{font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;color:var(--ink);
+    text-transform:uppercase;letter-spacing:.04em}
+  .flag .ft em{font-style:normal;color:var(--red)}
+
+  .day{display:flex;align-items:center;gap:12px;margin:30px 0 14px}
+  .day .pulse{width:18px;height:18px;color:var(--red);flex:none}
+  .day-tag{font-family:'Oswald',sans-serif;font-weight:600;font-size:15px;
+    letter-spacing:.16em;color:var(--ink);white-space:nowrap;text-transform:uppercase}
+  .day-rule{height:1px;flex:1;background:var(--rule)}
+  .day-date{font-family:'Space Mono',monospace;font-size:12px;color:var(--mut)}
+
+  .round{background:#fff;border:1px solid var(--rule);border-radius:5px;
+    padding:15px 17px 16px;margin-bottom:12px;box-shadow:0 1px 0 rgba(22,32,42,.04)}
+  .r-head{display:flex;align-items:center;gap:11px;margin-bottom:11px}
+  .badge{width:30px;height:30px;border-radius:50%;background:var(--red);color:#fff;
+    font-family:'Oswald',sans-serif;font-weight:600;font-size:14px;display:grid;place-items:center;flex:none}
+  .r-meta{display:flex;flex-direction:column;line-height:1.2}
+  .r-round{font-family:'Space Mono',monospace;font-size:9.5px;font-weight:700;
+    letter-spacing:.18em;color:var(--teal);text-transform:uppercase}
+  .r-time{font-family:'Space Mono',monospace;font-size:13px;font-weight:700;color:var(--ink);margin-top:2px}
+  .opt{margin-left:9px;font-family:'Space Mono',monospace;font-size:8.5px;font-weight:700;
+    letter-spacing:.12em;color:var(--red);background:var(--red-pale);
+    border:1px solid rgba(200,30,54,.3);border-radius:3px;padding:2px 6px;text-transform:uppercase}
+  .chip{width:42px;height:42px;border-radius:50%;background:var(--teal-pale);color:var(--teal);
+    display:grid;place-items:center;margin-left:auto;flex:none}
+  .ico{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .act{font-family:'Oswald',sans-serif;font-weight:600;font-size:22px;color:var(--ink);
+    text-transform:uppercase;letter-spacing:.015em;line-height:1.06}
+  .loc{display:block;margin-top:2px;font-size:12.5px;font-weight:500;color:var(--teal-d);
+    text-decoration:underline;text-underline-offset:2px;text-decoration-color:rgba(14,124,123,.45)}
+  .stop-desc{font-size:13.5px;color:var(--slate);max-width:48ch;margin-top:7px}
+  .rx{font-family:'Space Mono',monospace;font-size:11px;color:var(--teal-d);margin-top:10px;
+    padding-left:12px;border-left:2px solid var(--teal);letter-spacing:.01em;line-height:1.65}
+  .rx b{color:var(--red);font-weight:700}
+  .rx a{color:var(--teal-d);text-decoration:underline;text-underline-offset:2px;text-decoration-color:rgba(14,124,123,.4)}
+
+  .orders{margin-top:26px;border-top:2px solid var(--ink);padding-top:18px}
+  .orders-tag{font-family:'Oswald',sans-serif;font-weight:600;font-size:15px;
+    letter-spacing:.16em;color:var(--ink);text-transform:uppercase;margin-bottom:13px}
+  .rule-item{display:grid;grid-template-columns:auto 1fr;gap:11px;align-items:start;margin-bottom:12px}
+  .rx-glyph{font-family:'Space Mono',monospace;font-weight:700;font-size:14px;color:var(--red);
+    background:var(--red-pale);width:26px;height:26px;border-radius:5px;display:grid;place-items:center;flex:none}
+  .rule-item h4{font-family:'Oswald',sans-serif;font-weight:500;font-size:15px;color:var(--ink);
+    text-transform:uppercase;letter-spacing:.03em;margin-bottom:2px}
+  .rule-item p{font-size:13px;color:var(--slate)}
+
+  .foot{margin-top:24px;background:var(--ink);margin:24px -30px -30px;padding:18px 30px;text-align:center}
+  .foot .sign{font-family:'Oswald',sans-serif;font-weight:400;font-size:14px;
+    letter-spacing:.16em;color:var(--red);text-transform:uppercase}
+
+  a{color:var(--teal-d)}
+
+  @media (max-width:430px){
+    .body,.mast{padding-left:20px;padding-right:20px}
+    .foot{margin-left:-20px;margin-right:-20px;padding-left:20px;padding-right:20px}
+    .title{font-size:clamp(58px,20vw,104px)}
+  }
+  @media print{
+    body{background:#fff;padding:0}
+    .card{box-shadow:none;border:none;max-width:none}
+    .round,.rule-item,.admit{break-inside:avoid}.day{break-after:avoid}
+    @page{margin:.35in}
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-golf" viewBox="0 0 24 24"><path d="M8 21V3l9 3-9 3"/><path d="M4 21h16"/><circle cx="14.5" cy="19" r="1.4"/></symbol>
+  <symbol id="i-tbone" viewBox="0 0 24 24"><path d="M6 8.5c1.5-2.4 5.5-3.3 8.5-2.6 3.4.8 5.6 3.2 5 6.4-.6 3.2-3.8 6.2-7.8 6.2-3.4 0-6.4-2.2-7-5.2-.3-1.6-.2-3.4 1.3-4.8Z"/><path d="M12 8.3v8"/><path d="M9.4 9.6c1.7-1 3.5-1 5.2 0"/></symbol>
+  <symbol id="i-cigar" viewBox="0 0 24 24"><rect x="3" y="13.4" width="15" height="3.4" rx="1.7" transform="rotate(-18 10.5 15.1)"/><path d="M13.5 12.3l1.4 .9"/><path d="M16 6c1-.9 1-1.8 0-2.7M19 7.4c1-.9 1-1.8 0-2.7"/></symbol>
+  <symbol id="i-flute" viewBox="0 0 24 24"><path d="M9 3h6l-1 7h-4z"/><path d="M12 10v8"/><path d="M9 21h6"/><path d="M12 18v3"/><circle cx="10.6" cy="5.4" r=".5"/><circle cx="13.2" cy="6.6" r=".5"/></symbol>
+  <symbol id="i-bat" viewBox="0 0 24 24"><g transform="rotate(-38 12 12)"><path d="M6 11.3 11 10.9c4.3-.9 6.6-1.5 8.6 0 1 .8 1 1.4 0 2.2-2 1.5-4.3.9-8.6 0L6 12.7Z"/><circle cx="4.7" cy="12" r="1.4"/></g></symbol>
+  <symbol id="i-burger" viewBox="0 0 24 24"><path d="M4 10a8 5.5 0 0 1 16 0z"/><path d="M4 13.5h16"/><path d="M4 12c2 1.4 4-1 6 .2s4 1 6-.2"/><path d="M5 16.5h14a3 3 0 0 1-3 2.5H8a3 3 0 0 1-3-2.5z"/><path d="M9 7.4h.01M12 6.6h.01M15 7.4h.01"/></symbol>
+  <symbol id="i-house" viewBox="0 0 24 24"><path d="M3.5 11.5 12 4.5l8.5 7"/><path d="M6 10v10h12V10"/><path d="M10.5 20v-6h3v6"/></symbol>
+  <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l2-5 3 9 2-6 1.5 2H21"/></symbol>
+</svg>
+
+<main class="card">
+
+  <header class="mast">
+    <div class="cross">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#C81E36" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pulse"/></svg>
+      <span class="kicker">Doctor's Orders</span>
+    </div>
+    <div class="preline">Dr. J's</div>
+    <h1 class="title">Rounds</h1>
+    <div class="sub">A Louisville bachelor weekend · July 10&ndash;11, 2026</div>
+    <div class="trace" aria-hidden="true">
+      <div class="strip">
+        <svg width="1200" height="72"><path d="M0 44 h64 c6 0 8 -4 11 -4 c3 0 5 4 11 4 h14 l5 3 l6 -22 l6 26 l5 -7 h10 c6 0 9 -7 14 -7 c5 0 8 7 14 7 h40 h64 c6 0 8 -4 11 -4 c3 0 5 4 11 4 h14 l5 3 l6 -22 l6 26 l5 -7 h10 c6 0 9 -7 14 -7 c5 0 8 7 14 7 h40 h80 l8 -38 l8 42 l6 -4 h98 h64 c6 0 8 -4 11 -4 c3 0 5 4 11 4 h14 l5 3 l6 -22 l6 26 l5 -7 h10 c6 0 9 -7 14 -7 c5 0 8 7 14 7 h40 h64 c6 0 8 -4 11 -4 c3 0 5 4 11 4 h14 l5 3 l6 -22 l6 26 l5 -7 h10 c6 0 9 -7 14 -7 c5 0 8 7 14 7 h40 h64 c6 0 8 -4 11 -4 c3 0 5 4 11 4 h14 l5 3 l6 -22 l6 26 l5 -7 h10 c6 0 9 -7 14 -7 c5 0 8 7 14 7 h40"/></svg>
+        <svg width="1200" height="72"><path d="M0 44 h64 c6 0 8 -4 11 -4 c3 0 5 4 11 4 h14 l5 3 l6 -22 l6 26 l5 -7 h10 c6 0 9 -7 14 -7 c5 0 8 7 14 7 h40 h64 c6 0 8 -4 11 -4 c3 0 5 4 11 4 h14 l5 3 l6 -22 l6 26 l5 -7 h10 c6 0 9 -7 14 -7 c5 0 8 7 14 7 h40 h80 l8 -38 l8 42 l6 -4 h98 h64 c6 0 8 -4 11 -4 c3 0 5 4 11 4 h14 l5 3 l6 -22 l6 26 l5 -7 h10 c6 0 9 -7 14 -7 c5 0 8 7 14 7 h40 h64 c6 0 8 -4 11 -4 c3 0 5 4 11 4 h14 l5 3 l6 -22 l6 26 l5 -7 h10 c6 0 9 -7 14 -7 c5 0 8 7 14 7 h40 h64 c6 0 8 -4 11 -4 c3 0 5 4 11 4 h14 l5 3 l6 -22 l6 26 l5 -7 h10 c6 0 9 -7 14 -7 c5 0 8 7 14 7 h40"/></svg>
+      </div>
+    </div>
+  </header>
+
+  <div class="band">
+    <span>ATTENDING: <b>Dr. J</b></span>
+    <span>PARTY OF <b>8</b></span>
+    <span>RX: <b>Golf · Bourbon · Cigars</b></span>
+  </div>
+
+  <div class="body">
+
+    <div class="admit">
+      <div class="chip"><svg class="ico"><use href="#i-house"/></svg></div>
+      <div>
+        <div class="lbl">Admission · Room Assignment</div>
+        <div class="lh">The House — Highlands</div>
+        <div class="la"><a href="https://www.airbnb.com/rooms/1189060896822178460" target="_blank" rel="noopener">963 Baxter Avenue, Louisville, KY 40204</a></div>
+        <div class="ld">Home base in the Highlands, roughly 10 minutes to downtown and sitting dead center between the golf and the steaks. Hot tub on site.</div>
+        <div class="flag">
+          <span class="rxm">℞</span>
+          <span class="ft"><em>Don't forget &mdash;</em> pack a swimsuit for the hot tub.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="day">
+      <svg class="pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pulse"/></svg>
+      <span class="day-tag">Friday</span><span class="day-rule"></span><span class="day-date">07.10</span>
+    </div>
+
+    <div class="round">
+      <div class="r-head">
+        <div class="badge">01</div>
+        <div class="r-meta"><span class="r-round">Round 01</span><span class="r-time">2:30 – 5:00 PM</span></div>
+        <div class="chip"><svg class="ico"><use href="#i-golf"/></svg></div>
+      </div>
+      <div class="act">Golf<a class="loc" href="https://topgolf.com/us/louisville/" target="_blank" rel="noopener">Topgolf</a></div>
+      <div class="stop-desc">Climbing the leaderboard before anyone's had the chance to lie about their handicap. Heated bays, cold beer, 102 targets, and a full chance to humble the doc on his own turf.</div>
+      <div class="rx"><b>℞</b> Clubs provided. <a href="https://maps.google.com/?q=Topgolf+301+Oxmoor+Lane+Louisville+KY" target="_blank" rel="noopener">301 Oxmoor Lane</a> — east end, about 20 min from downtown and the house.</div>
+    </div>
+
+    <div class="round">
+      <div class="r-head">
+        <div class="badge">02</div>
+        <div class="r-meta"><span class="r-round">Round 02</span><span class="r-time">8:00 PM</span></div>
+        <div class="chip"><svg class="ico"><use href="#i-tbone"/></svg></div>
+      </div>
+      <div class="act">Dinner<a class="loc" href="https://www.instagram.com/repeallouisville/" target="_blank" rel="noopener">Repeal Oak Fired Steakhouse</a></div>
+      <div class="stop-desc">Whiskey Row's only oak fired steakhouse, steaks seared over reclaimed bourbon barrels, 200 plus spirits behind the bar inside Hotel Distil. Change out of the golf clothes and come hungry, Friday is the big swing of the weekend.</div>
+      <div class="rx"><b>℞ Dress:</b> smart casual. <a href="https://maps.google.com/?q=Repeal+Oak+Fired+Steakhouse+101+W+Main+St+Louisville" target="_blank" rel="noopener">101 W Main St</a>, inside Hotel Distil.</div>
+    </div>
+
+    <div class="round">
+      <div class="r-head">
+        <div class="badge">03</div>
+        <div class="r-meta"><span class="r-round">Round 03</span><span class="r-time">Late · Nightcap</span></div>
+        <span class="opt">Optional</span>
+        <div class="chip"><svg class="ico"><use href="#i-cigar"/></svg></div>
+      </div>
+      <div class="act">Nightcap<a class="loc" href="https://www.instagram.com/dcgdowntown/" target="_blank" rel="noopener">Trophy Bar @ Derby City Gaming</a></div>
+      <div class="stop-desc">Hand rolled cigars, 80 plus bourbons, and a gaming floor a few blocks from dinner. Downtown's only cigar bar you can walk into without a membership, open till 2 AM. We'll play this one by ear, but the bars are happening regardless of whether it's this spot.</div>
+      <div class="rx"><b>℞</b> Cigars · bourbon · slots. <a href="https://maps.google.com/?q=Trophy+Bar+Derby+City+Gaming+401+W+Market+St+Louisville" target="_blank" rel="noopener">401 W Market St</a></div>
+    </div>
+
+    <div class="day">
+      <svg class="pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pulse"/></svg>
+      <span class="day-tag">Saturday</span><span class="day-rule"></span><span class="day-date">07.11</span>
+    </div>
+
+    <div class="round">
+      <div class="r-head">
+        <div class="badge">04</div>
+        <div class="r-meta"><span class="r-round">Round 04</span><span class="r-time">11:00 – 1:00</span></div>
+        <div class="chip"><svg class="ico"><use href="#i-flute"/></svg></div>
+      </div>
+      <div class="act">Brunch<a class="loc" href="https://www.instagram.com/porchlouisville/" target="_blank" rel="noopener">Porch Kitchen &amp; Bar</a></div>
+      <div class="stop-desc">Southern comfort plates, hot honey fried chicken, and $10 bottomless mimosas to undo Friday. Named one of America's best bourbon bars, if anyone's already back at it.</div>
+      <div class="rx"><b>℞</b> Casual. Free valet. <a href="https://maps.google.com/?q=Porch+Kitchen+Bar+280+W+Jefferson+St+Louisville" target="_blank" rel="noopener">280 W Jefferson St</a>, inside the Marriott.</div>
+    </div>
+
+    <div class="round">
+      <div class="r-head">
+        <div class="badge">05</div>
+        <div class="r-meta"><span class="r-round">Round 05</span><span class="r-time">1:00 – 3:00</span></div>
+        <div class="chip"><svg class="ico"><use href="#i-bat"/></svg></div>
+      </div>
+      <div class="act">Bourbon &amp; Bats<a class="loc" href="https://www.instagram.com/slugger_museum/" target="_blank" rel="noopener">Louisville Slugger &amp; Big Bat Bourbon</a></div>
+      <div class="stop-desc">Tour the factory that's armed every big leaguer for a century, then blend and bottle your own bourbon next door. You pick the recipe, you name it, you take the bottle home.</div>
+      <div class="rx"><b>℞</b> 21 and up. Bourbon &amp; Bats combo ticket. <a href="https://maps.google.com/?q=Louisville+Slugger+Museum+800+W+Main+St+Louisville" target="_blank" rel="noopener">800 W Main St</a></div>
+    </div>
+
+    <div class="round">
+      <div class="r-head">
+        <div class="badge">06</div>
+        <div class="r-meta"><span class="r-round">Round 06</span><span class="r-time">6:30 PM</span></div>
+        <div class="chip"><svg class="ico"><use href="#i-burger"/></svg></div>
+      </div>
+      <div class="act">Dinner<a class="loc" href="https://www.instagram.com/mussel_burger_bar/" target="_blank" rel="noopener">Mussel &amp; Burger Bar</a></div>
+      <div class="stop-desc">Chef driven burgers and gourmet mussels, loud and easy with nothing to overthink. The relaxed landing the whole weekend's been building toward.</div>
+      <div class="rx"><b>℞</b> Casual. Built for groups. <a href="https://maps.google.com/?q=Mussel+Burger+Bar+113+S+7th+St+Louisville" target="_blank" rel="noopener">113 S 7th St</a></div>
+    </div>
+
+    <div class="orders">
+      <div class="orders-tag">Standing Orders</div>
+      <div class="rule-item">
+        <span class="rx-glyph">℞</span>
+        <div>
+          <h4>Splitting the check</h4>
+          <p>No restaurant in town will split a check past 4 people. If you cover something for the group, snap a photo of the itemized receipt and we'll settle up after.</p>
+        </div>
+      </div>
+      <div class="rule-item">
+        <span class="rx-glyph">℞</span>
+        <div>
+          <h4>Pack one sharp outfit</h4>
+          <p>Friday dinner has a dress code. Bring one thing that isn't golf clothes, and the swimsuit for the tub.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="foot">
+      <div class="sign">Doctor's orders — show up thirsty.</div>
+    </div>
+
+  </div>
+</main>
+</body>
+</html>
