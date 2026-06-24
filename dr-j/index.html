@@ -77,6 +77,53 @@
     letter-spacing:.18em;color:var(--teal);text-transform:uppercase}
   .basenote p{font-size:13px;color:var(--slate);margin-top:4px;line-height:1.6;max-width:54ch}
 
+  /* live status strip */
+  .live{display:none;align-items:center;gap:9px;margin-top:12px;background:var(--ink);
+    color:#EAF1EE;border-radius:8px;padding:9px 14px;font-family:'Space Mono',monospace;
+    font-size:11.5px;letter-spacing:.02em;line-height:1.45}
+  .live .dot{width:8px;height:8px;border-radius:50%;background:var(--mut);flex:none}
+  .live.is-on .dot{background:var(--red);animation:liveblink 1.4s ease-in-out infinite}
+  .live b{color:#fff;font-weight:700}
+  @keyframes liveblink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.75)}}
+
+  /* live itinerary states */
+  .round{transition:opacity .4s ease,box-shadow .3s ease,border-color .3s ease}
+  .round.is-past{opacity:.4}
+  .round.is-past .act{text-decoration:line-through;text-decoration-color:var(--mut);color:var(--mut)}
+  .round.is-past .badge{color:transparent;position:relative;background:var(--mut)}
+  .round.is-past .badge::after{content:"\2713";position:absolute;inset:0;display:flex;
+    align-items:center;justify-content:center;color:#fff;font-size:16px;font-weight:700;font-family:'Inter',sans-serif}
+  .round.is-now{border:2px solid var(--red);background:var(--red-pale);border-radius:12px;
+    box-shadow:0 0 0 4px rgba(200,30,54,.10);margin:0 -6px;padding:14px 16px}
+  .round.is-now .badge{background:var(--red);color:#fff}
+  .round.is-next{border:1.5px solid var(--teal);border-radius:12px;margin:0 -6px;padding:12px 16px}
+  .livetag{display:inline-flex;align-items:center;gap:5px;width:fit-content;margin-top:7px;
+    font-family:'Space Mono',monospace;font-size:9.5px;font-weight:700;letter-spacing:.13em;
+    text-transform:uppercase;padding:3px 9px;border-radius:999px;white-space:nowrap}
+  .is-now .livetag{background:var(--red);color:#fff}
+  .is-next .livetag{background:var(--teal-pale);color:var(--teal-d);border:1px solid rgba(14,124,123,.42)}
+  .livetag .lt-dot{width:6px;height:6px;border-radius:50%;background:#fff;animation:liveblink 1.4s ease-in-out infinite}
+  @media (prefers-reduced-motion:reduce){.live.is-on .dot,.livetag .lt-dot{animation:none}}
+
+  /* countdown widget */
+  .cd{position:fixed;right:14px;bottom:14px;z-index:60;display:none;align-items:center;gap:10px;
+    background:var(--ink);color:#EAF1EE;border-radius:12px;padding:9px 30px 9px 11px;
+    max-width:min(82vw,250px);box-shadow:0 10px 28px rgba(22,32,42,.30);
+    margin-bottom:env(safe-area-inset-bottom,0px)}
+  .cd.show{display:flex;animation:cdin .4s cubic-bezier(.2,.7,.2,1) both}
+  @keyframes cdin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  .cd-ic{width:28px;height:28px;flex:none;border-radius:50%;background:rgba(200,30,54,.16);
+    display:flex;align-items:center;justify-content:center}
+  .cd-ic svg{width:16px;height:16px;fill:none;stroke:var(--red);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .cd-k{display:block;font-family:'Space Mono',monospace;font-size:8.5px;font-weight:700;
+    letter-spacing:.18em;text-transform:uppercase;color:#7FB7B2}
+  .cd-v{display:block;font-family:'Oswald',sans-serif;font-weight:600;font-size:19px;
+    color:#fff;line-height:1.1;margin-top:1px;letter-spacing:.01em}
+  .cd-x{position:absolute;top:5px;right:8px;background:none;border:none;color:var(--mut);
+    font-size:15px;line-height:1;cursor:pointer;padding:2px}
+  .cd-x:hover{color:#fff}
+  @media (prefers-reduced-motion:reduce){.cd.show{animation:none}}
+
   .day{display:flex;align-items:center;gap:12px;margin:30px 0 14px}
   .day .pulse{width:18px;height:18px;color:var(--red);flex:none}
   .day-tag{font-family:'Oswald',sans-serif;font-weight:600;font-size:15px;
@@ -175,6 +222,8 @@
     <span>RX: <b>Golf · Bourbon · Cigars</b></span>
   </div>
 
+  <div class="live" id="live" aria-live="polite"></div>
+
   <div class="body">
 
     <div class="admit">
@@ -201,7 +250,7 @@
       <span class="day-tag">Friday</span><span class="day-rule"></span><span class="day-date">07.10</span>
     </div>
 
-    <div class="round">
+    <div class="round" data-name="Topgolf" data-start="2026-07-10T14:30:00-04:00" data-end="2026-07-10T17:00:00-04:00">
       <div class="r-head">
         <div class="badge">01</div>
         <div class="r-meta"><span class="r-round">Round 01</span><span class="r-time">2:30 – 5:00 PM</span></div>
@@ -212,7 +261,7 @@
       <div class="rx"><b>℞</b> Clubs provided. <a href="https://maps.google.com/?q=Topgolf+301+Oxmoor+Lane+Louisville+KY" target="_blank" rel="noopener">301 Oxmoor Lane</a> — east end, about 20 min from downtown and the house.</div>
     </div>
 
-    <div class="round">
+    <div class="round" data-name="Jeff Ruby's" data-start="2026-07-10T19:30:00-04:00" data-end="2026-07-10T21:30:00-04:00">
       <div class="r-head">
         <div class="badge">02</div>
         <div class="r-meta"><span class="r-round">Round 02</span><span class="r-time">7:30 PM</span></div>
@@ -223,7 +272,7 @@
       <div class="rx"><b>℞ Dress:</b> business casual, the dressy night of the trip. <a href="https://maps.google.com/?q=Jeff+Rubys+Steakhouse+325+W+Main+St+Louisville" target="_blank" rel="noopener">325 W Main St</a>, valet out front on 4th.</div>
     </div>
 
-    <div class="round">
+    <div class="round" data-name="Boys Night Out" data-start="2026-07-10T22:00:00-04:00" data-end="2026-07-11T02:00:00-04:00">
       <div class="r-head">
         <div class="badge">03</div>
         <div class="r-meta"><span class="r-round">Round 03</span><span class="r-time">10 PM &rarr; Last Call</span></div>
@@ -239,7 +288,7 @@
       <span class="day-tag">Saturday</span><span class="day-rule"></span><span class="day-date">07.11</span>
     </div>
 
-    <div class="round">
+    <div class="round" data-name="Brunch" data-start="2026-07-11T11:00:00-04:00" data-end="2026-07-11T13:00:00-04:00">
       <div class="r-head">
         <div class="badge">04</div>
         <div class="r-meta"><span class="r-round">Round 04</span><span class="r-time">11:00 – 1:00</span></div>
@@ -250,7 +299,7 @@
       <div class="rx"><b>℞</b> Casual. Free valet. <a href="https://maps.google.com/?q=Porch+Kitchen+Bar+280+W+Jefferson+St+Louisville" target="_blank" rel="noopener">280 W Jefferson St</a>, inside the Marriott.</div>
     </div>
 
-    <div class="round">
+    <div class="round" data-name="Bourbon and Bats" data-start="2026-07-11T13:00:00-04:00" data-end="2026-07-11T15:00:00-04:00">
       <div class="r-head">
         <div class="badge">05</div>
         <div class="r-meta"><span class="r-round">Round 05</span><span class="r-time">1:00 – 3:00</span></div>
@@ -261,7 +310,7 @@
       <div class="rx"><b>℞</b> 21 and up. Bourbon &amp; Bats combo ticket. <a href="https://maps.google.com/?q=Louisville+Slugger+Museum+800+W+Main+St+Louisville" target="_blank" rel="noopener">800 W Main St</a></div>
     </div>
 
-    <div class="round">
+    <div class="round" data-name="Mussel and Burger" data-start="2026-07-11T18:30:00-04:00" data-end="2026-07-11T20:30:00-04:00">
       <div class="r-head">
         <div class="badge">06</div>
         <div class="r-meta"><span class="r-round">Round 06</span><span class="r-time">6:30 PM</span></div>
@@ -296,5 +345,81 @@
 
   </div>
 </main>
+
+<div class="cd" id="cd" role="status" aria-live="polite">
+  <span class="cd-ic"><svg viewBox="0 0 24 24"><use href="#i-pulse"/></svg></span>
+  <span><span class="cd-k" id="cd-k">Kickoff in</span><span class="cd-v" id="cd-v">&mdash;</span></span>
+  <button class="cd-x" id="cd-x" aria-label="Hide countdown">&times;</button>
+</div>
+
+<script>
+(function(){
+  var rounds = Array.prototype.slice.call(document.querySelectorAll('.round[data-start]'));
+  if(!rounds.length) return;
+  var live = document.getElementById('live');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var events = rounds.map(function(el){
+    return { el:el, name:el.getAttribute('data-name')||'',
+      start:new Date(el.getAttribute('data-start')), end:new Date(el.getAttribute('data-end')) };
+  });
+  var firstStart = events[0].start, lastEnd = events[events.length-1].end, scrolled = false;
+
+  function clock(d){ try{ return new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',weekday:'short',hour:'numeric',minute:'2-digit'}).format(d); }catch(e){ return d.toLocaleTimeString(); } }
+  function tod(d){ try{ return new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'numeric',minute:'2-digit'}).format(d); }catch(e){ return ''; } }
+  function tag(ev){ var t=ev.el.querySelector('.livetag'); if(!t){ t=document.createElement('span'); t.className='livetag'; (ev.el.querySelector('.r-meta')||ev.el).appendChild(t); } return t; }
+  function untag(ev){ var t=ev.el.querySelector('.livetag'); if(t) t.parentNode.removeChild(t); }
+
+  function render(){
+    var now = new Date(), nowEv = null, nextEv = null;
+    events.forEach(function(ev){
+      ev.el.classList.remove('is-past','is-now','is-next');
+      if(now >= ev.end){ ev.el.classList.add('is-past'); untag(ev); }
+      else if(now >= ev.start){ nowEv = ev; }
+    });
+    for(var i=0;i<events.length;i++){ if(now < events[i].start){ nextEv = events[i]; break; } }
+    events.forEach(function(ev){ if(ev!==nowEv && ev!==nextEv && !ev.el.classList.contains('is-past')) untag(ev); });
+    if(nowEv){ nowEv.el.classList.add('is-now'); tag(nowEv).innerHTML='<span class="lt-dot"></span>Happening now'; }
+    if(nextEv && nextEv!==nowEv){ nextEv.el.classList.add('is-next'); tag(nextEv).textContent='Up next'; }
+
+    if(live){
+      var msg, on=false;
+      if(now < firstStart){ msg='Kickoff '+clock(firstStart)+' — '+events[0].name; }
+      else if(now >= lastEnd){ msg="That's a wrap. Safe travels home."; }
+      else if(nowEv){ on=true; msg='<b>LIVE</b> · '+clock(now)+' — Now: '+nowEv.name; }
+      else if(nextEv){ msg=clock(now)+' — Up next: '+nextEv.name+' at '+tod(nextEv.start); }
+      else { msg=clock(now); }
+      live.style.display='flex';
+      live.classList.toggle('is-on',on);
+      live.innerHTML='<span class="dot"></span><span>'+msg+'</span>';
+    }
+    if(!scrolled && nowEv){ scrolled=true; try{ nowEv.el.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'}); }catch(e){} }
+  }
+  render();
+  setInterval(render, 30000);
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden) render(); });
+
+  // ---- countdown widget: days -> hours -> h:m, hides at kickoff ----
+  var cd=document.getElementById('cd'), cdK=document.getElementById('cd-k'),
+      cdV=document.getElementById('cd-v'), cdX=document.getElementById('cd-x');
+  if(cd){
+    var KICK=firstStart.getTime(), DAY=864e5, HOUR=36e5, MIN=6e4;
+    var T24=KICK-24*HOUR, T6AM=new Date('2026-07-10T06:00:00-04:00').getTime(), hidden=false;
+    function pad(n){ return (n<10?'0':'')+n; }
+    function cdTick(){
+      if(hidden) return;
+      var now=Date.now();
+      if(now>=KICK){ cd.classList.remove('show'); return; }
+      var diff=KICK-now, val;
+      if(now<T24){ var d=Math.ceil(diff/DAY); val=d+(d===1?' day':' days'); }
+      else if(now<T6AM){ var h=Math.ceil(diff/HOUR); val=h+(h===1?' hr':' hrs'); }
+      else { var hh=Math.floor(diff/HOUR), mm=Math.floor((diff%HOUR)/MIN); val=hh+'h '+pad(mm)+'m'; }
+      cdK.textContent='Kickoff in'; cdV.textContent=val;
+      cd.classList.add('show');
+    }
+    if(cdX) cdX.addEventListener('click', function(){ hidden=true; cd.classList.remove('show'); });
+    cdTick(); setInterval(cdTick, 1000);
+  }
+})();
+</script>
 </body>
 </html>
