@@ -124,6 +124,28 @@
   .cd-x:hover{color:#fff}
   @media (prefers-reduced-motion:reduce){.cd.show{animation:none}}
 
+  /* house manual */
+  .hman{margin-top:22px;border:1.5px solid var(--rule);border-radius:14px;padding:16px 16px 8px;background:#fff}
+  .hman-head{display:flex;align-items:center;gap:9px;font-family:'Oswald',sans-serif;font-weight:600;
+    font-size:16px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink);margin-bottom:14px}
+  .hman-head svg{width:20px;height:20px;flex:none;stroke:var(--teal);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .hman-top{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .hmc{background:var(--teal-pale);border-radius:10px;padding:11px 13px;display:flex;flex-direction:column}
+  .hmk{font-family:'Space Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-d)}
+  .hmk.red{color:var(--red)}
+  .hmbig{font-family:'Space Mono',monospace;font-weight:700;font-size:26px;letter-spacing:.06em;color:var(--ink);margin-top:4px;line-height:1}
+  .hmbig.sm{font-size:16px;letter-spacing:.02em;word-break:break-word;margin-top:5px}
+  .hmsub{font-size:12px;color:var(--slate);margin-top:7px;line-height:1.5}
+  .hmsub b{color:var(--ink);font-family:'Space Mono',monospace;font-weight:700}
+  .hmrow{margin-top:14px;padding-top:14px;border-top:1px solid var(--rule)}
+  .hmrow > .hmk{display:block;margin-bottom:7px}
+  .hmrow p{font-size:13px;color:var(--slate);line-height:1.6;max-width:62ch}
+  .hmlist{list-style:none;margin:0;padding:0}
+  .hmlist li{position:relative;padding-left:18px;font-size:13px;color:var(--slate);line-height:1.55;margin-bottom:7px;max-width:62ch}
+  .hmlist li:last-child{margin-bottom:0}
+  .hmlist li::before{content:"";position:absolute;left:3px;top:7px;width:6px;height:6px;border-radius:50%;background:var(--teal)}
+  @media (max-width:480px){.hman-top{grid-template-columns:1fr}}
+
   .day{display:flex;align-items:center;gap:12px;margin:30px 0 14px}
   .day .pulse{width:18px;height:18px;color:var(--red);flex:none}
   .day-tag{font-family:'Oswald',sans-serif;font-weight:600;font-size:15px;
@@ -244,6 +266,47 @@
       <span class="bn-k">On the strip</span>
       <p>Home base sits right on the Baxter and Bardstown strip, with bars and patios a few steps out the front door. No rush between stops, so there's plenty of time to chill at the house, hit the hot tub, and explore the neighborhood.</p>
     </div>
+
+    <section class="hman">
+      <div class="hman-head"><svg viewBox="0 0 24 24"><use href="#i-house"/></svg>House Manual</div>
+
+      <div class="hman-top">
+        <div class="hmc">
+          <span class="hmk">Door code</span>
+          <span class="hmbig">5702</span>
+          <span class="hmsub">Punch in the code and twist the lock to open. To lock, press the center button and twist.</span>
+        </div>
+        <div class="hmc">
+          <span class="hmk">WiFi</span>
+          <span class="hmbig sm">BNB Louisville</span>
+          <span class="hmsub">Password <b>BNBLouisville</b></span>
+        </div>
+      </div>
+
+      <div class="hmrow">
+        <span class="hmk">Parking</span>
+        <p>Off street spaces sit in our lot behind the house. Come off Baxter Ave by the T-Mobile store, take the driveway, then turn right at the alley. Park along the black iron fence.</p>
+      </div>
+
+      <div class="hmrow">
+        <span class="hmk red">Discharge · Check out 10:00 AM</span>
+        <ul class="hmlist">
+          <li>Run the dishwasher. Hand wash any pots and pans and put them away.</li>
+          <li>Pile dirty towels on the floor in the downstairs bathroom.</li>
+          <li>Full trash bags go in the black cans behind the garage. Spare bags are under the sink.</li>
+          <li>Lock all doors and windows before you leave.</li>
+          <li>Text to confirm once you're checked out.</li>
+        </ul>
+      </div>
+
+      <div class="hmrow">
+        <span class="hmk">House rules</span>
+        <ul class="hmlist">
+          <li>No smoking or vaping inside. Smoke outside and drop butts in the receptacles.</li>
+          <li>Keep the noise outside to a minimum, especially after 11:00 PM.</li>
+        </ul>
+      </div>
+    </section>
 
     <div class="day">
       <svg class="pulse" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><use href="#i-pulse"/></svg>
